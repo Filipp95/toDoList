@@ -1,0 +1,20 @@
+.task_list_container_hided{
+    display: none;
+}
+
+.task_list_container{
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+    align-items: center;
+    padding-top: 30px;
+}
+
+.tasks{
+    height: 350px;
+    overflow-y: scroll;
+}
+
+.clear_completed_tasks_button{
+    width: 300px;
+}

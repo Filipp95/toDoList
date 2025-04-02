@@ -1,0 +1,29 @@
+.task_container {
+    width: 525px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.task_text{
+    font-size: 2rem;
+    width: 420px;
+}
+
+.task_text_crossed{
+    font-size: 2rem;
+    width: 420px;
+    text-decoration: line-through;
+}
+
+
+.edit_task_text{
+    font-size: 2rem;
+    width: 420px;
+}
+
+.task_box{  
+    height: 23px;
+    width: 23px;
+}
