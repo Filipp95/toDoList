@@ -22,6 +22,7 @@ const TaskCheckboxElement = ({ id, complete, children, handleEditTask, handleDel
   const [isEditHover, setIsEditHover] = useState<boolean>(false);
   const [isDeleteHover, setIsDeleteHover] = useState<boolean>(false);
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [editInputValue, setEditInputValue] = useState<number | string>(children);
 
   const newTextRef = useRef<HTMLInputElement | null>(null);
 
@@ -66,6 +67,11 @@ const TaskCheckboxElement = ({ id, complete, children, handleEditTask, handleDel
     setIsDeleteHover(false)
   }
 
+  const handleInputEditHandler = (e:React.ChangeEvent<HTMLInputElement>) =>{
+    e.stopPropagation()
+    setEditInputValue(e.target.value)
+  }
+
   return (
     <div className={s.task_container}>
       <Checkbox.Root checked={complete} onChange={handleCheckChange}>
@@ -73,8 +79,8 @@ const TaskCheckboxElement = ({ id, complete, children, handleEditTask, handleDel
         <Checkbox.Control className={s.task_box}/>
         {isEditing ?
           <form className={s.add_task_form_wrapper} onBlur={handleSaveEditText}>
-            <input ref={newTextRef} className={s.edit_task_text} type='text' name="task" defaultValue={children} 
-            onChange={(e)=>e.stopPropagation()} onInput={(e)=>e.stopPropagation()} />
+            <input ref={newTextRef} value={editInputValue}  className={s.edit_task_text} type='text' name="task"
+             onChange={handleInputEditHandler} onInput={(e)=>e.stopPropagation()}/>
           </form>
           : <Checkbox.Label className={complete ? s.task_text_crossed : s.task_text} >{children}</Checkbox.Label>}
       </Checkbox.Root>

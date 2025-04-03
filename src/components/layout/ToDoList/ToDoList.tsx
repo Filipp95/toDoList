@@ -3,11 +3,12 @@ import TaskSection from "@/components/module/TaskSection/TaskSection";
 
 import { IsTaskList, StatusTaskType } from "@/components/types/tasktypes";
 
+
 import { useState, useEffect } from "react";
 
 const ToDoList = () => {
     const [isTaskList, setTasksList] = useState<IsTaskList[]>([]);
-    const [filterStatus, setFilterStatus] = useState<StatusTaskType>(localStorage.getItem("filterStatus") || "all");
+    const [filterStatus, setFilterStatus] = useState<StatusTaskType>((localStorage.getItem("filterStatus") as StatusTaskType));
     const [filteredTasksList, setFilteredTasksList] = useState<IsTaskList[]>([]);
     const [activeTaskQuantity, setActiveTaskQuantity] = useState<number | string>('0');
 
@@ -29,7 +30,7 @@ const ToDoList = () => {
 
     const loadFromLs = () => {
         const isSaved = localStorage.getItem("toDos")
-        const savedFilterStatus = localStorage.getItem("filterStatus") || "all";
+        const savedFilterStatus = (localStorage.getItem("filterStatus") as StatusTaskType) || StatusTaskType.ALL;
         const savedActiveTask = localStorage.getItem("activeTaskQuantity") || '0';
         if (isSaved) {
             try {
@@ -47,15 +48,17 @@ const ToDoList = () => {
 
     const handleFilterList = (status: StatusTaskType) => {
         setFilterStatus(status);
-        localStorage.setItem("filterStatus", status);
         if (status === "all") {
             updatedFilteredTasks = isTaskList;
+            localStorage.setItem("filterStatus", "all");
         }
         else if (status === 'active') {
             updatedFilteredTasks = isTaskList.filter((task) => task.complete === false)
+            localStorage.setItem("filterStatus", "active");
         }
         else if (status === 'completed') {
             updatedFilteredTasks = isTaskList.filter((task) => task.complete === true)
+            localStorage.setItem("filterStatus", "completed");
         }
         setFilteredTasksList(updatedFilteredTasks)
     }

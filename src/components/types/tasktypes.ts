@@ -4,4 +4,8 @@ export interface IsTaskList {
     note: string | undefined, 
 }
 
-export type StatusTaskType = "all" | "active" | "completed" | string 
+export enum StatusTaskType {
+    ALL = "all",
+    ACTIVE = "active",
+    COMPLETED = "completed"
+}

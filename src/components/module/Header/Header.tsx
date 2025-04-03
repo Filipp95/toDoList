@@ -3,7 +3,7 @@ import FilterTasksButton from "@/components/elements/FilterTasksButton/FilterTas
 
 import { IsTaskList } from "@/components/types/tasktypes";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import { StatusTaskType } from "@/components/types/tasktypes";
 
@@ -26,6 +26,7 @@ interface HeaderProps {
 
 const Header = ({ isTaskList, filterStatus, handleFilterList, saveToLS, setTasksList, setActiveTaskQuantity, saveActiveTasksToLS}: HeaderProps) => {
     const taskRef = useRef<HTMLInputElement | null>(null);
+    const [inputValue, setInputValue] = useState<number | string>()
 
     const handleAddTask = (e: React.FormEvent) => {
         e.preventDefault();
@@ -53,7 +54,9 @@ const Header = ({ isTaskList, filterStatus, handleFilterList, saveToLS, setTasks
             </div>
             <div className={s.header_tasks_controls}>
                 <form className={s.add_task_form_wrapper} onSubmit={handleAddTask}>
-                    <input ref={taskRef} className={s.add_task_input_field} type='text' name="task" placeholder="Введите задачу или заметку..." required />
+                    <input ref={taskRef} className={s.add_task_input_field} value={inputValue} 
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setInputValue(e.target.value)} type='text' name="task"
+                     placeholder="Введите задачу или заметку..." required />
                     <div className={s.add_task_buttons}>
                         <Button type='submit' colorPalette="gray" size="xl" variant="solid" className={s.apply_new_task_button}>Добавить</Button>
                     </div>
