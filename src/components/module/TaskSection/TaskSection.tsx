@@ -11,12 +11,15 @@ interface TaskSectionProps {
     handleClearCompletedList: () => void,
 }
 
-const TaskSection = ({tasksForToDoList, activeTaskQuantity, handleEditTask, handleDeleteTask, handleCompleteTask, handleClearCompletedList}: TaskSectionProps) => {
+const TaskSection = ({tasksForToDoList = [], activeTaskQuantity, handleEditTask, handleDeleteTask, handleCompleteTask, handleClearCompletedList}: TaskSectionProps) => {
+    
+    const taskCheckStatus = tasksForToDoList.length > 0;
+    
     return (
         <div>
-            <EmptyList tasksForToDoList={tasksForToDoList}/>
+          {!taskCheckStatus?  <EmptyList tasksForToDoList={tasksForToDoList}/> :
             <TasksList tasksForToDoList={tasksForToDoList} activeTaskQuantity={activeTaskQuantity} handleEditTask={handleEditTask} 
-            handleDeleteTask={handleDeleteTask} handleCompleteTask={handleCompleteTask} handleClearCompletedList={handleClearCompletedList}/>
+            handleDeleteTask={handleDeleteTask} handleCompleteTask={handleCompleteTask} handleClearCompletedList={handleClearCompletedList}/>}
         </div>
     )
 }

@@ -3,11 +3,14 @@ import ImageComponent from "@/components/elements/ImageComponent/ImageComponent"
 import emptyPng from "@/assets/images/emptylist/empty_list_image.png"
 import emptyWebp from "@/assets/images/emptylist/empty_list_image.webp"
 
+import { IsTaskList } from "@/components/types/tasktypes";
+
 import s from "./EmptyList.module.scss"
 
 type EmptyListProps = {
-    tasksForToDoList: Array<object>,
+    tasksForToDoList: IsTaskList[],
 }
+
 
 const EmptyList = ({tasksForToDoList}:EmptyListProps) => {
     return (

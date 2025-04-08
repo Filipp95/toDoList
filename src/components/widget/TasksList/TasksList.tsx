@@ -20,9 +20,8 @@ const TasksList = ({ tasksForToDoList, activeTaskQuantity, handleEditTask, handl
     const handleDeleteButtonClick = () => {
         handleClearCompletedList()
     }
-
     return (
-        <div className={tasksForToDoList.length ? s.task_list_container : s.task_list_container_hided}>
+        <div className={ tasksForToDoList.length  ? s.task_list_container : s.task_list_container_hided}>
             <div className={s.tasks}>
                 {tasksForToDoList.map((task) => {
                     return (
